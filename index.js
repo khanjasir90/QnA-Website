@@ -1,23 +1,16 @@
 const express = require('express')
-const { auth } = require('express-openid-connect')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 const app = express()
 
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: process.env.SECRET,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.CLIENT_ID,
-    issuerBaseURL: process.env.ISSUER_BASE_URL
-};
 
-app.use(auth(config))
 
-app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+app.set('views','./views')
+app.set('view engine','ejs')
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
+app.use(express.static('public'))
 
 
 
-app.listen(3000,()=>console.log('Server running on port 3000'))
+app.listen(process.env.PORT,()=>console.log('Server running on port 3000'))
