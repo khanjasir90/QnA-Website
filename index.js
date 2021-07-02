@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const { Model } = require('mongoose')
+const session  = require('express-session')
+const cookieParser = require('cookie-parser')
 
 const path = require('path')
 require('./model/db')
@@ -10,20 +12,29 @@ const Login = require('./model/login')
 const Question = require('./model/question')
 const Answer = require('./model/answer')
 
+const index = require('./routes/index')
 const userlogin = require('./routes/userlogin')
 const question =require('./routes/question')
 const answer = require('./routes/answer')
 const sort = require('./routes/sort')
+const userlogout= require('./routes/userlogout')
 
 app.set('views','./views')
 app.set('view engine','ejs')
-
+app.use('/js',express.static(__dirname+'/public/js'))
+app.use('/css',express.static(__dirname+'/public/css'))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
+app.use(index)
 app.use(userlogin)
 app.use(question)
 app.use(answer)
 app.use(sort)
+app.use(userlogout)
 
 app.listen(process.env.PORT,()=>console.log('Server running on port 3000'))

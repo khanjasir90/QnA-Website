@@ -1,12 +1,13 @@
+const e = require('express')
 const express = require('express')
 const router = express.Router()
 
-router.get('/login',(req,res)=>{
-    // login code here
+router.get('/loginPage',(req,res)=>{
+    res.render('login')
 })
 
-router.post('/register',(req,res)=>{
-    //register code here
+router.post('/authenticateLogin',(req,res)=>{
+    res.render('index')
 })
 
 module.exports = router
