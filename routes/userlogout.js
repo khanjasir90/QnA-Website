@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/logout',(req,res)=> {
-    var sess = req.session.username
-    console.log(sess)
+    req.session.username = ""
+    res.render('index',{username:req.session.username})
 })
 module.exports = router

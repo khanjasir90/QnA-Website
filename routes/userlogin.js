@@ -1,13 +1,30 @@
-const e = require('express')
 const express = require('express')
 const router = express.Router()
-
+const Login = require('../model/login')
 router.get('/loginPage',(req,res)=>{
-    res.render('login')
+    if(req.session.username) {
+        res.render('index',{username : req.session.username})
+    }else{
+        res.render('login',{error:""})
+    }
+    
 })
 
 router.post('/authenticateLogin',(req,res)=>{
-    res.render('index')
+    const username = req.body.username
+    const password = req.body.password
+    Login.findOne({username,username},(err,obj)=>{
+        if(err) {
+            console.log(err)
+        }else if(obj == null) {
+            res.render('login',{error : "Incorrect Username or Password!!!"})
+        }else if(obj.password != password){
+            res.render('login',{error : "Incorrect Username or Password!!!"})
+        }else{
+            req.session.username = username
+            res.render('index',{username:req.session.username})
+        }
+    })
 })
 
 module.exports = router
