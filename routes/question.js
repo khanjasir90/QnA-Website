@@ -7,24 +7,24 @@ router.post('/postQuestion',(req,res)=>{
         const question = new Question({
             question : req.body.question,
             date : new Date(),
-            askedbyusername : req.body.username
+            askedbyusername : req.session.username
         })
         if(question.save()){
             res.render('index',{
-                username : req.body.username,
-                succmsg : "Thank you for posting a Question! You can now see it on home page",
+                username : req.session.username,
+                succmsg : " for posting a Question! You can now see it on home page",
                 errmsg : ""
             })
         }else{
             res.render('index',{
-                username : req.body.username,
+                username : req.session.username,
                 succmsg : "",
-                errmsg : "Sorry there was an internal error while posting a Question! Try Again!"
+                errmsg : " there was an internal error while posting a Question! Try Again!"
             })
         }
     }else{ 
         res.render('index',{
-            username : req.body.username,
+            username : req.session.username,
             succmsg : "",
             errmsg : "You cannot post a Blank Question! Try Again "
         })
