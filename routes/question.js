@@ -3,8 +3,9 @@ const router = express.Router()
 const Question = require('../model/question')
 router.post('/postQuestion',(req,res)=>{
     // post question code here
-    if(req.body.question) {
+    if(req.body.question && req.body.title) {
         const question = new Question({
+            title : req.body.title,
             question : req.body.question,
             date : new Date(),
             askedbyusername : req.session.username
