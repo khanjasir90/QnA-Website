@@ -17,10 +17,7 @@
           <% if (username) { %>
               <h6><%= username %></h6>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                Ask a Question
-                <span class="button__icone">
-                  <ion-icon name="help-outline"></ion-icon>
-                </span>
+                Answer a Question
               </button>
               <a href="/logout" class="btn btn-primary">Logout</a>
           <% } else {%>
@@ -33,7 +30,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="exampleModalLabel">
-              Post a Question
+               Post an Answer 
               <span>
                 <ion-icon name="pencil-outline"></ion-icon>
               </span>
@@ -45,13 +42,10 @@
           </div>
           <div class="modal-body">
 
-            <form method="POST" action="/postQuestion">
+            <form method="POST" action="/answerQuestion/<%= questionid%>">
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Title</label>
-                <br>
-                <input type="text" class="form-control" name="title"></input>
-                <label for="message-text" class="col-form-label">Question Body</label>
-                <textarea class="form-control" id="question" row="5" name="question" ></textarea>
+                <label for="message-text" class="col-form-label"><strong>Enter your Answer here!</strong></label>
+                <textarea class="form-control" id="answer" row="5" name="answer" ></textarea>
               </div>
           </div>
           <div class="modal-footer">
@@ -62,39 +56,39 @@
       </form>
       </div>
     </div>
-
-    <% if (succmsg) { %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Thank You!</strong> <%= succmsg %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% } %>
-
-    <% if (errmsg) { %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Sorry! </strong> <%= errmsg %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% } %>
-    <br>
-
+   
     <% question.forEach(function(question){ %>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= question.title %></h5>
-          <p class="card-text"><%= question.question %></p>
-          <div class="d-flex justify-content-end">
-            <strong>Answer Count :  </strong>
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-end">
+                    <strong>Asked by : <%= question.askedbyusername%>  </strong>
+                </div>
+              <strong><%= question.title%></strong>
+                <p><%= question.question%></p>
+            </div>
           </div>
-          <a href="/getAnswerPage/<%= question._id %>" class="btn btn-primary">See Answer >>></a>
-        </div>
+      <% }); %>
+        
+      <div class="d-flex justify-content-center">
+        <strong> Answer  </strong>
+    </div>
+
+    <% if (answerflag) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Sorry! </strong> <%= answerflag %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+  <% } else { %>
+    <% answer.forEach(function(answer){ %>
+      <div class="card">
+          <div class="card-header">
+              <p><%= answer.answer%></p>
+          </div>
+        </div>
     <% }); %>
-    
+    <% } %>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

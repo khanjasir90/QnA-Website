@@ -9,6 +9,7 @@ router.get('/',(req,res)=>{
         }else if(!req.session.username) {
             res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj})
         }else{
+            //console.log(obj)
             res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj})
         }
     })
