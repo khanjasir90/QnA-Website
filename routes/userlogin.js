@@ -24,7 +24,7 @@ router.post('/authenticateLogin',(req,res)=>{
         }else{
             Question.find({},(err,obj)=>{
                 req.session.username = username
-                res.render('index',{username:req.session.username,succmsg : "",errmsg:"",question:obj})
+                res.render('index',{username:req.session.username,succmsg : "",errmsg:"",question:obj,bookmark:""})
             })
         }
     })

@@ -17,7 +17,8 @@ router.post('/postQuestion',async (req,res)=>{
                     username : req.session.username,
                     succmsg : " for posting a Question! You can now see it on home page",
                     errmsg : "",
-                    question : obj
+                    question : obj,
+                    bookmark : ""
                 })
             })
         }else{
@@ -26,7 +27,8 @@ router.post('/postQuestion',async (req,res)=>{
                     username : req.session.username,
                     succmsg : "",
                     errmsg : " there was an internal error while posting a Question! Try Again!",
-                    question: obj
+                    question: obj,
+                    bookmark : "",
                 })
             })
         }
@@ -36,7 +38,8 @@ router.post('/postQuestion',async (req,res)=>{
                 username : req.session.username,
                 succmsg : "",
                 errmsg : "You cannot post a Blank Question! Try Again ",
-                question : obj
+                question : obj,
+                bookmark : "",
             })
         })
     }

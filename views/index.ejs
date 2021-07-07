@@ -22,6 +22,7 @@
                   <ion-icon name="help-outline"></ion-icon>
                 </span>
               </button>
+              <a href="/getBookmark" class="btn btn-primary">Your Bookmarks</a>
               <a href="/logout" class="btn btn-primary">Logout</a>
           <% } else {%>
             <a class="btn btn-primary" href="/loginPage">Login</a>
@@ -80,11 +81,26 @@
         </button>
       </div>
     <% } %>
+
+    <% if (bookmark) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Sorry! </strong> <%= bookmark %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+
     <br>
 
     <% question.forEach(function(question){ %>
       <div class="card">
         <div class="card-body">
+          <div class="d-flex justify-content-end">
+            <a href="/bookmark/<%= question._id%>-<%= question.question %>">
+              <ion-icon name="bookmarks-outline" size="small"></ion-icon>
+            </a>
+          </div>
           <h5 class="card-title"><%= question.title %></h5>
           <p class="card-text"><%= question.question %></p>
           <div class="d-flex justify-content-end">
@@ -101,6 +117,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
     <script src="/js/script.js"></script>
   </body>
 

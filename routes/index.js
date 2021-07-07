@@ -7,10 +7,10 @@ router.get('/',(req,res)=>{
         if(err){
             console.log('There was an error while quering the database')
         }else if(!req.session.username) {
-            res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj})
+            res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj,bookmark:""})
         }else{
             //console.log(obj)
-            res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj})
+            res.render('index',{username : req.session.username,succmsg : "",errmsg:"",question:obj,bookmark:""})
         }
     })
    
