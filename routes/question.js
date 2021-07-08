@@ -8,7 +8,8 @@ router.post('/postQuestion',async (req,res)=>{
             title : req.body.title,
             question : req.body.question,
             date : new Date(),
-            askedbyusername : req.session.username
+            askedbyusername : req.session.username,
+            answer_count : 0
         })
         var flag = await question.save()
         if(question.save()){

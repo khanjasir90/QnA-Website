@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const Bookmark = require('../model/bookmark')
 const Question = require('../model/question')
-router.get('/bookmark/:id-:question',(req,res)=>{
+router.get('/bookmark/:id-:question-:answer_count',(req,res)=>{
     if(!req.session.username) {
         Question.find({},(err,obj)=>{
             res.render('index',{
@@ -14,10 +15,12 @@ router.get('/bookmark/:id-:question',(req,res)=>{
             })
         })
     }else{
+        console.log(req.params.answer_count)
         const bookmark = new Bookmark({
             question_id : req.params.id,
             question : req.params.question,
             bookmark_username : req.session.username,
+            answer_count : req.params.answer_count
         })
         if(bookmark.save()){
             res.redirect('/')
@@ -38,5 +41,15 @@ router.get('/getBookmark',(req,res)=>{
     })
 })
 
+router.get('/deleteBookmark/:id',(req,res)=>{
+    Bookmark.deleteOne({"_id" : mongoose.Types.ObjectId(req.params.id)},(err,status)=>{
+        if(err) {
+            console.log(err)
+        }else{
+            console.log(status)
+            res.redirect('/getBookmark')
+        }
+    })
+})
 
 module.exports = router

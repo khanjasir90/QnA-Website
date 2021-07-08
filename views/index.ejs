@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="#">QnA</a>
+          <a class="navbar-brand" href="/">QnA</a>
           <% if (username) { %>
               <h6><%= username %></h6>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
@@ -92,19 +93,22 @@
     <% } %>
 
     <br>
-
+    <!-- <div class="container">
+      <h3>Popover Example</h3>
+        <a href="#" title="Dismissible popover" data-toggle="popover" data-trigger="focus" data-content="Click anywhere in the document to close this popover">Click me</a>
+    </div> -->
     <% question.forEach(function(question){ %>
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-end">
-            <a href="/bookmark/<%= question._id%>-<%= question.question %>">
+            <a href="/bookmark/<%= question._id%>-<%= question.question %>-<%= question.answer_count %>" title="Bookmark Added!!!" data-toggle="popover" data-trigger="focus" data-content="You can now see it in Bookmark Page">
               <ion-icon name="bookmarks-outline" size="small"></ion-icon>
             </a>
           </div>
           <h5 class="card-title"><%= question.title %></h5>
           <p class="card-text"><%= question.question %></p>
           <div class="d-flex justify-content-end">
-            <strong>Answer Count :  </strong>
+            <strong>Answer Count : <%= question.answer_count %> </strong>
           </div>
           <a href="/getAnswerPage/<%= question._id %>" class="btn btn-primary">See Answer >>></a>
         </div>

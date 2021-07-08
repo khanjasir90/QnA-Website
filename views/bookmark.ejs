@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="#">QnA</a>
+          <a class="navbar-brand" href="/">QnA</a>
           <% if (username) { %>
               <h6><%= username %></h6>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
@@ -85,10 +85,15 @@
     <% question.forEach(function(question){ %>
       <div class="card">
         <div class="card-body">
+          <div class="d-flex justify-content-end">
+            <a href="/deleteBookmark/<%= question._id%>" title="Bookmark Removed!!!" data-toggle="popover" data-trigger="focus" data-content="Your Bookmark have been removed!!!">
+              <ion-icon name="bookmarks-outline" size="small"></ion-icon>
+            </a>
+          </div>
           <h5 class="card-title"><%= question.title %></h5>
           <p class="card-text"><%= question.question %></p>
           <div class="d-flex justify-content-end">
-            <strong>Answer Count :  </strong>
+            <strong>Answer Count : <%= question.answer_count%> </strong>
           </div>
           <a href="/getAnswerPage/<%= question.question_id %>" class="btn btn-primary">See Answer >>></a>
         </div>

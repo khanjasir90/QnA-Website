@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const router = express.Router()
 const Answer = require('../model/answer')
 const Question = require('../model/question')
@@ -13,6 +14,17 @@ router.post('/answerQuestion/:_id',async(req,res)=>{
         })
         var flag = await newanswer.save()
         if(newanswer.save()) {
+            Question.findOneAndUpdate(
+                { "_id" :  mongoose.Types.ObjectId(req.params._id)},{
+                    $inc : {answer_count : +1}
+                },(err,status)=>{
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log(status)
+                    }
+                }
+            )
             res.redirect('/getAnswerPage/'+req.params._id)            
         }
     }
