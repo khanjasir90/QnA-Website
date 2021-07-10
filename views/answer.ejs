@@ -111,10 +111,18 @@
   <% } else { %>
     <% answer.forEach(function(answer){ %>
       <div class="card">
+        <div class="card-body">
+        <div class="d-flex justify-content-end">
+          <a href="/vote/<%= answer._id %>-<%= answer.question_id%>">
+            <ion-icon name="caret-up-outline" size="large" id="upvote"></ion-icon>
+            <span><h5><%= answer.votes %></h5></span>
+          </a>
+        </div>
           <div class="card-header">
-              <p><%= answer.answer%></p>
+              <p id="ans"><%= answer.answer%></p>
           </div>
         </div>
+      </div>
     <% }); %>
     <% } %>
 

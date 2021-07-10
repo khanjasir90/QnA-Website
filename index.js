@@ -20,6 +20,8 @@ const answer = require('./routes/answer')
 const sort = require('./routes/sort')
 const userlogout= require('./routes/userlogout')
 const bookmark = require('./routes/bookmark')
+const vote = require('./routes/vote')
+
 
 app.set('views','./views')
 app.set('view engine','ejs')
@@ -39,4 +41,6 @@ app.use(answer)
 app.use(sort)
 app.use(userlogout)
 app.use(bookmark)
+app.use(vote)
+
 app.listen(process.env.PORT,()=>console.log('Server running on port 3000'))
