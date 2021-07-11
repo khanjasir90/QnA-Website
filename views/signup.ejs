@@ -11,8 +11,8 @@
 </head>
 <body>
     
-    <form class="form-signin" method="POST" action="/authenticateLogin">
-        <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
+    <form class="form-signin" method="POST" action="/signup">
+        <h1 class="h3 mb-3 font-weight-normal">Please Signup before Login</h1>
         <% if (error) { %>
             <div class="alert alert-danger" role="alert">
                 <%= error %>
@@ -22,8 +22,9 @@
         <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address"  autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        <a href = "/signup" class="btn btn-lg btn-primary btn-block" id="signup">Signup</a>
+        <label for="inputPassword" class="sr-only">Confirm Password</label>
+        <input type="password" id="inputPassword" name="cpassword" class="form-control" placeholder="Password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Signup</button>
     </form>
     
     

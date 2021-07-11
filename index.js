@@ -21,7 +21,7 @@ const sort = require('./routes/sort')
 const userlogout= require('./routes/userlogout')
 const bookmark = require('./routes/bookmark')
 const vote = require('./routes/vote')
-
+const signup = require('./routes/signup')
 
 app.set('views','./views')
 app.set('view engine','ejs')
@@ -42,5 +42,6 @@ app.use(sort)
 app.use(userlogout)
 app.use(bookmark)
 app.use(vote)
+app.use(signup)
 
 app.listen(process.env.PORT,()=>console.log('Server running on port 3000'))

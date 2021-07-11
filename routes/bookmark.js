@@ -3,7 +3,8 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Bookmark = require('../model/bookmark')
 const Question = require('../model/question')
-router.get('/bookmark/:id-:question-:answer_count',(req,res)=>{
+router.get('/bookmark/:id',(req,res)=>{
+    console.log(req.params.id)
     if(!req.session.username) {
         Question.find({},(err,obj)=>{
             res.render('index',{
@@ -15,23 +16,25 @@ router.get('/bookmark/:id-:question-:answer_count',(req,res)=>{
             })
         })
     }else{
-        console.log(req.params.answer_count)
-        const bookmark = new Bookmark({
-            question_id : req.params.id,
-            question : req.params.question,
-            bookmark_username : req.session.username,
-            answer_count : req.params.answer_count
-        })
-        if(bookmark.save()){
-            res.redirect('/')
-        }else{
-            console.log('error')
-        }
+       Question.findOne({"_id" : mongoose.Types.ObjectId(req.params.id)},(qerr,qobj)=>{
+           const bookmark = new Bookmark({
+               question_id : req.params.id,
+               question :  qobj.question,
+               bookmark_username : req.session.username,
+               answer_count : qobj.answer_count
+           })
+           if(bookmark.save()){
+               res.redirect('/')
+           }else{
+               console.log('error')
+           }
+       })
     }
 })
 
 router.get('/getBookmark',(req,res)=>{
     Bookmark.find({bookmark_username : req.session.username},(err,obj)=>{
+        console.log(obj)
         res.render('bookmark',{
             username : req.session.username,
             question : obj,
