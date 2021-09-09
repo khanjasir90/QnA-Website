@@ -4,6 +4,7 @@ QnA-Webapp is a Community platform where people can ask their doubt by posting a
 -To run the project in your Local Machine
   - git clone https://github.com/khanjasir90/QnA-Website.git
   - run npm install
+  - run npm start
   - paste the following link in your browser : https://localhost:3000/
 
 
