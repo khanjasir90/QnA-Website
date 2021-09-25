@@ -9,7 +9,7 @@ QnA-Webapp is a Community platform where people can ask their doubt by posting a
 <br>
 <h4>Screenshots of QnA-Website : </h4>
 <h3><b>Register: </b></h3>
-<img src="https://github.com/khanjasir90/QnA-Website/tree/main/screenshot/signup.jpg" width = 80% height= 70%><br>
+<img src="https://github.com/khanjasir90/QnA-Website/blob/main/screenshot/signup.jpg" width = 80% height= 70%><br>
 <h3><b>Login : </b></h3>
 <img src="https://github.com/khanjasir90/QnA-Website/tree/main/screenshot/login.jpg" width = 80% height= 70%><br>
 <h3><b>Home: </b></h3>
